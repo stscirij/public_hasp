@@ -500,6 +500,8 @@ class HASP_SegmentList(SegmentList):
                     deviation_squared[i] = deviation[i] * deviation[i]
             nonzero_deviations = np.where(deviation != 0.0)
             n_nonzero = len(nonzero_deviations[0])
+            list_of_segments.append(segment)
+            rownum.append(segment.name)
             if n_nonzero > 0:
                 sorted_nonzero_deviations = deviation[nonzero_deviations]
                 sorted_nonzero_deviations.sort()
@@ -508,21 +510,20 @@ class HASP_SegmentList(SegmentList):
                 mean_squared_deviation[nseg] = deviation_squared[nonzero_deviations].mean()
                 median_deviation[nseg] = np.median(sorted_nonzero_deviations)
                 median_squared_deviation[nseg] = np.median(sorted_nonzero_squared_deviations)
-                list_of_segments.append(segment)
-                rownum.append(segment.name)
             else:
                 mean_deviation[nseg] = 0.0
                 median_deviation[nseg] = 0.0
                 mean_squared_deviation[nseg] = 0.0
                 median_squared_deviation[nseg] = 0.0
             if verbose:
-                print(f'for segment {nseg}')
+                print(f'for segment {nseg} ({segment.filename})')
                 print(f'{ndeviations[nseg]} non-zero deviations')
                 print(f'Mean deviation = {mean_deviation[nseg]}')
                 print(f'Mean squared deviation = {mean_squared_deviation[nseg]}')
                 print(f'Median deviation = {median_deviation[nseg]}')
                 print(f'Median squared deviation = {median_squared_deviation[nseg]}')
-
+        if len(list_of_segments) != nsegments:
+            print(f"len(list_of_segments) = {len(list_of_segments)} while nsegments = {nsegments}")
         return list_of_segments, rownum, ndeviations, mean_deviation, median_deviation, mean_squared_deviation, median_squared_deviation
 
 
