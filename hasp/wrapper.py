@@ -638,7 +638,8 @@ def main(indir, outdir, clobber=False, threshold=-50, snrmax=20, no_keyword_filt
         print("-------------------------------------------------")
         _, _ = create_cross_program_products('cross-program', uniqmodes,singletargetdict,
                                              indir,snrmax, threshold, outdir, clobber,
-                                             keyword_filters, write_products=True)
+                                             keyword_filters, write_products=True,
+                                             target_name=target_name)
         print("Creating these single grating products that will be used in the abutted products")
         print("Mode              Detector")
         print("--------------------------")
