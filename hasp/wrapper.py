@@ -1202,7 +1202,7 @@ def create_output_file_name(prod, producttype, level):
         else:
             if (instrument == 'cos'):
                 lifetime_position_string = 'lp{:02d}'.format(prod.lifetime_position)
-                name = f"hst_{instrument}_{target}_{grating}_{lifetime_position_string}_{suffix}.fits"
+                name = f"hst_{instrument}_{target}_{grating}-{lifetime_position_string}_{suffix}.fits"
             else:
                 name = f"hst_{instrument}_{target}_{grating}_{suffix}.fits"
     return name
